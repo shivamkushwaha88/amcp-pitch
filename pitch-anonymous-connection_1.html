@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Pitch — Anonymous Meaningful Connection Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #2a2a3a;
+    --accent: #7c6af7;
+    --accent2: #f7c26a;
+    --accent3: #6af7c2;
+    --text: #e8e8f0;
+    --muted: #7a7a94;
+    --danger: #f76a6a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0 60px;
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(124,106,247,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(124,106,247,0.3);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 7vw, 78px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span {
+    color: var(--accent);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent2);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 540px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 56px;
+  }
+
+  .pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .pill.green { border-color: rgba(106,247,194,0.3); color: var(--accent3); }
+  .pill.yellow { border-color: rgba(247,194,106,0.3); color: var(--accent2); }
+  .pill.purple { border-color: rgba(124,106,247,0.3); color: var(--accent); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 560px;
+  }
+
+  .stat {
+    background: var(--card);
+    padding: 24px 28px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 20px 0;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  /* PHILOSOPHY BLOCK */
+  .philosophy-quote {
+    border-left: 3px solid var(--accent);
+    padding: 20px 28px;
+    background: var(--card);
+    border-radius: 0 12px 12px 0;
+    margin: 32px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* CARDS GRID */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .card h4 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .card p {
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* INTENT LIST */
+  .intent-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .intent-chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .intent-chip span { color: var(--accent); font-size: 16px; }
+
+  /* NOT LIST */
+  .not-list {
+    background: rgba(247,106,106,0.05);
+    border: 1px solid rgba(247,106,106,0.2);
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 24px;
+  }
+
+  .not-list h4 { color: var(--danger); margin-bottom: 16px; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+
+  .not-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(247,106,106,0.1);
+  }
+  .not-item:last-child { border: none; }
+  .not-item::before { content: '✕'; color: var(--danger); font-size: 12px; }
+
+  /* REVENUE TABLE */
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 32px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th {
+    background: var(--card);
+    padding: 14px 20px;
+    text-align: left;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr:hover td { background: rgba(124,106,247,0.04); }
+
+  .td-green { color: var(--accent3); font-weight: 500; }
+  .td-yellow { color: var(--accent2); font-weight: 500; }
+  .td-purple { color: var(--accent); font-weight: 500; }
+
+  /* MONETIZATION MODELS */
+  .mono-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .mono-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mono-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .mono-card.m1::before { background: linear-gradient(90deg, var(--accent), transparent); }
+  .mono-card.m2::before { background: linear-gradient(90deg, var(--accent2), transparent); }
+  .mono-card.m3::before { background: linear-gradient(90deg, var(--accent3), transparent); }
+  .mono-card.m4::before { background: linear-gradient(90deg, var(--danger), transparent); }
+
+  .mono-card h4 { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+  .mono-card .model-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .mono-card.m1 .model-tag { color: var(--accent); }
+  .mono-card.m2 .model-tag { color: var(--accent2); }
+  .mono-card.m3 .model-tag { color: var(--accent3); }
+  .mono-card.m4 .model-tag { color: var(--danger); }
+  .mono-card p { font-size: 13px; margin: 0; }
+  .mono-card .price { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--text); margin-top: 16px; }
+  .mono-card .price small { font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--muted); font-weight: 300; }
+
+  /* TECH STACK */
+  .stack-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .stack-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .stack-block h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .stack-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .stack-item:last-child { border: none; }
+  .stack-item::before { content: '→'; color: var(--accent); }
+
+  /* TIMELINE */
+  .timeline {
+    margin-top: 32px;
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--accent3));
+    border-radius: 2px;
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+
+  .tl-phase {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 4px;
+  }
+
+  .tl-item h4 { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .tl-item p { font-size: 13px; margin: 0; }
+
+  /* ROLES NEEDED */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .role-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .role-icon { font-size: 32px; margin-bottom: 12px; }
+  .role-card h4 { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+  .role-card p { font-size: 12px; line-height: 1.6; }
+  .role-card .role-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 100px;
+    text-transform: uppercase;
+  }
+  .role-tag.core { background: rgba(124,106,247,0.1); color: var(--accent); border: 1px solid rgba(124,106,247,0.2); }
+  .role-tag.social { background: rgba(247,194,106,0.1); color: var(--accent2); border: 1px solid rgba(247,194,106,0.2); }
+  .role-tag.ops { background: rgba(106,247,194,0.1); color: var(--accent3); border: 1px solid rgba(106,247,194,0.2); }
+
+  /* COST TABLE */
+  .cost-free { color: var(--accent3); }
+  .cost-low { color: var(--accent2); }
+
+  /* CTA */
+  .cta-block {
+    background: linear-gradient(135deg, rgba(124,106,247,0.1), rgba(106,247,194,0.05));
+    border: 1px solid rgba(124,106,247,0.2);
+    border-radius: 24px;
+    padding: 60px 48px;
+    text-align: center;
+    margin: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-block::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(124,106,247,0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-block h2 { font-size: clamp(28px, 4vw, 48px); margin-bottom: 16px; }
+  .cta-block p { font-size: 17px; margin-bottom: 0; max-width: 500px; margin: 0 auto; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; color: #111; }
+    .hero::after { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-stats { grid-template-columns: 1fr; }
+    .stack-row { grid-template-columns: 1fr; }
+    .container { padding: 0 20px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="tag">Startup Pitch Document · 2025</div>
+    <h1>Anonymous<br><em>Meaningful</em><br><span>Connection.</span></h1>
+    <p class="hero-sub">A platform where people meet strangers privately and safely — based on what they need emotionally, socially, or intellectually. No identity. No judgment. Pure connection.</p>
+
+    <div class="pill-row">
+      <div class="pill purple">Text-Only</div>
+      <div class="pill green">100% Anonymous</div>
+      <div class="pill yellow">Intent-First Matching</div>
+      <div class="pill purple">AI Moderation</div>
+      <div class="pill green">Zero Infra Cost to Start</div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">₹50</span>
+        <div class="stat-label">Monthly Premium</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">~0</span>
+        <div class="stat-label">Launch Cost</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">8–11w</span>
+        <div class="stat-label">Time to MVP</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISION -->
+  <section>
+    <div class="section-label">01 — The Vision</div>
+    <h2>What is this, really?</h2>
+    <p>We're building a platform where people can find the exact kind of human connection they need — right now, today — without any identity risk. Not a dating app. Not random chat. Something genuinely new.</p>
+    <div class="philosophy-quote">
+      "Meet someone who matches what you need today."
+    </div>
+    <p>Loneliness is a documented global crisis. People want real conversation, study partners, accountability buddies, or just someone to vent to — but existing platforms either require identity exposure or devolve into inappropriate spaces. We're filling that gap.</p>
+    <p>The platform philosophy rests on four pillars:</p>
+    <div class="cards">
+      <div class="card"><div class="card-icon">🔒</div><h4>Private</h4><p>No name, no photo, no identity reveal — ever. Total anonymity by design.</p></div>
+      <div class="card"><div class="card-icon">🛡️</div><h4>Safe</h4><p>AI moderation, reputation scoring, and fast reporting keeps bad actors out.</p></div>
+      <div class="card"><div class="card-icon">👤</div><h4>Anonymous</h4><p>When the chat ends, it's gone. No trails, no records, no awkwardness.</p></div>
+      <div class="card"><div class="card-icon">💬</div><h4>Meaningful</h4><p>Intent-first matching ensures conversations have purpose and direction.</p></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="section-label">02 — How It Works</div>
+    <h2>Intent-First Matching</h2>
+    <p>Before entering any chat, a user selects what kind of connection they're looking for. This single step changes everything — it filters intent, sets expectations, and makes every conversation purposeful.</p>
+
+    <div class="intent-grid">
+      <div class="intent-chip"><span>🤝</span> Best Friend</div>
+      <div class="intent-chip"><span>📚</span> Study Buddy</div>
+      <div class="intent-chip"><span>🎯</span> Accountability Partner</div>
+      <div class="intent-chip"><span>👂</span> Listener</div>
+      <div class="intent-chip"><span>💼</span> Career Discussion</div>
+      <div class="intent-chip"><span>🚀</span> Motivation Friend</div>
+      <div class="intent-chip"><span>🎨</span> Hobby Friend</div>
+      <div class="intent-chip"><span>🌍</span> Language Exchange</div>
+      <div class="intent-chip"><span>🧠</span> Deep Conversation</div>
+      <div class="intent-chip"><span>🌱</span> Companion Friend</div>
+      <div class="intent-chip"><span>📖</span> Educational Friend</div>
+    </div>
+
+    <div class="not-list">
+      <h4>What this platform is NOT</h4>
+      <div class="not-item">Dating app or romantic matching</div>
+      <div class="not-item">Hookup or adult content platform</div>
+      <div class="not-item">Random unmoderated chat (like Omegle)</div>
+      <div class="not-item">Social media or identity-based networking</div>
+      <div class="not-item">Harassment or explicit content space</div>
+    </div>
+  </section>
+
+  <!-- SAFETY -->
+  <section>
+    <div class="section-label">03 — Safety & Moderation</div>
+    <h2>Safety is the product.</h2>
+    <p>Without trust, this platform dies. So safety isn't a feature — it's the foundation. We build three layers of protection:</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <h4>AI Chat Moderation</h4>
+        <p>Real-time detection of sexual solicitation, harassment, spam, and privacy invasion. Powered by Claude API. Automatic warnings, restrictions, and bans.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⭐</div>
+        <h4>Hidden Reputation Score</h4>
+        <p>Every user has a trust score. Good behavior raises it. Reports lower it. Good users get matched with good users. Bad actors get isolated then removed.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚩</div>
+        <h4>One-Tap Reporting</h4>
+        <p>Every chat has a visible report button. Fast action on repeat abuse. Zero tolerance for harassment or identity solicitation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONETIZATION -->
+  <section>
+    <div class="section-label">04 — Revenue Models</div>
+    <h2>How we make money</h2>
+    <p>Multiple revenue streams ensure we're not dependent on a single model. The ₹50/month premium price is deliberately low — designed for mass adoption, not exclusivity.</p>
+
+    <div class="mono-cards">
+      <div class="mono-card m1">
+        <span class="model-tag">Primary Revenue</span>
+        <h4>Premium Subscription</h4>
+        <p>Unlimited daily matches, priority queue, advanced category filters, language preferences, interest matching, and premium badges.</p>
+        <div class="price">₹50 <small>/ month</small></div>
+      </div>
+      <div class="mono-card m2">
+        <span class="model-tag">Future Revenue</span>
+        <h4>Featured Matching Boost</h4>
+        <p>One-time purchase to appear higher in the matching queue for 24–48 hours. Low friction, impulse-friendly pricing.</p>
+        <div class="price">₹10–20 <small>/ boost</small></div>
+      </div>
+      <div class="mono-card m3">
+        <span class="model-tag">B2B Revenue</span>
+        <h4>Institutional Access</h4>
+        <p>Universities, mental health orgs, or corporates can license the platform for peer support networks, study matching, or team bonding.</p>
+        <div class="price">Custom <small>pricing</small></div>
+      </div>
+      <div class="mono-card m4">
+        <span class="model-tag">Passive Revenue</span>
+        <h4>Non-Intrusive Ads</h4>
+        <p>Free tier users see subtle, non-disruptive sponsored messages between sessions. Never inside chats. Platform-culture safe ads only.</p>
+        <div class="price">CPM <small>based</small></div>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-top:40px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Timeline</th>
+            <th>Paid Users</th>
+            <th>Monthly Revenue</th>
+            <th>Monthly Costs</th>
+            <th>Net Profit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Month 1</td><td>100</td><td class="td-yellow">₹5,000</td><td>₹1,500</td><td class="td-green">₹3,500</td></tr>
+          <tr><td>Month 2</td><td>400</td><td class="td-yellow">₹20,000</td><td>₹2,500</td><td class="td-green">₹17,500</td></tr>
+          <tr><td>Month 3</td><td>1,000</td><td class="td-yellow">₹50,000</td><td>₹5,000</td><td class="td-green">₹45,000</td></tr>
+          <tr><td>Month 6</td><td>3,000</td><td class="td-yellow">₹1,50,000</td><td>₹12,000</td><td class="td-green">₹1,38,000</td></tr>
+          <tr><td>Month 12</td><td>8,000</td><td class="td-yellow">₹4,00,000</td><td>₹30,000</td><td class="td-green">₹3,70,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:12px; font-size:13px;">* Assumes ~5% conversion from active users to paid. 1,000 paid users = ~20,000 active monthly users.</p>
+  </section>
+
+  <!-- COSTS -->
+  <section>
+    <div class="section-label">05 — Infrastructure Costs</div>
+    <h2>Near-zero to launch.</h2>
+    <p>The entire platform can be launched and run for under ₹2,000/month at early scale. Every service below has a generous free tier.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Service</th><th>What For</th><th>Cost</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Vercel</td><td>Frontend hosting</td><td class="cost-free">Free</td></tr>
+          <tr><td>Railway.app</td><td>Backend + Redis</td><td class="cost-low">~₹500/mo</td></tr>
+          <tr><td>MongoDB Atlas</td><td>Database</td><td class="cost-free">Free (512MB)</td></tr>
+          <tr><td>Upstash Redis</td><td>Live matching queue</td><td class="cost-free">Free tier</td></tr>
+          <tr><td>Claude API</td><td>AI chat moderation</td><td class="cost-low">~₹800/mo</td></tr>
+          <tr><td>Razorpay</td><td>Payment processing</td><td class="cost-low">2% per txn</td></tr>
+          <tr><td>Resend</td><td>Transactional email</td><td class="cost-free">Free (3k/mo)</td></tr>
+          <tr><td>Domain (optional)</td><td>Custom URL</td><td class="cost-low">₹800/year</td></tr>
+          <tr><td><strong>Total</strong></td><td></td><td class="td-green"><strong>~₹1,500–2,000/mo</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section>
+    <div class="section-label">06 — Technical Stack</div>
+    <h2>Modern, scalable, affordable.</h2>
+    <p>The entire stack uses free or near-free tiers at early scale. Every technology is well-documented with a large community — no exotic choices.</p>
+
+    <div class="stack-row">
+      <div class="stack-block">
+        <h4>Frontend</h4>
+        <div class="stack-item">React.js</div>
+        <div class="stack-item">Tailwind CSS</div>
+        <div class="stack-item">Socket.IO Client</div>
+        <div class="stack-item">Vercel (hosting)</div>
+      </div>
+      <div class="stack-block">
+        <h4>Backend</h4>
+        <div class="stack-item">Node.js + Express</div>
+        <div class="stack-item">Socket.IO (real-time chat)</div>
+        <div class="stack-item">Redis (matching queue)</div>
+        <div class="stack-item">Railway.app (hosting)</div>
+      </div>
+      <div class="stack-block">
+        <h4>Data & AI</h4>
+        <div class="stack-item">MongoDB Atlas</div>
+        <div class="stack-item">Claude API (moderation)</div>
+        <div class="stack-item">JWT (auth tokens)</div>
+        <div class="stack-item">Resend (email)</div>
+      </div>
+      <div class="stack-block">
+        <h4>Payments & Infra</h4>
+        <div class="stack-item">Razorpay</div>
+        <div class="stack-item">GitHub (code)</div>
+        <div class="stack-item">Cloudflare (CDN/DDoS)</div>
+        <div class="stack-item">Upstash Redis</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section>
+    <div class="section-label">07 — Build Timeline</div>
+    <h2>MVP in 8–11 weeks.</h2>
+    <p>The platform is broken into clean phases. Each phase delivers a working, testable product. No phase is wasted work.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-phase">Week 1–3 · Phase 1</div>
+        <h4>Core UI + Intent Selection + Basic Chat</h4>
+        <p>Full frontend, intent selection screen, basic anonymous chat flow, Socket.IO real-time messaging, matching logic.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">Week 4–6 · Phase 2</div>
+        <h4>AI Moderation + Reputation System + Reporting</h4>
+        <p>Claude API integration for chat monitoring, reputation score engine, user reporting system, ban/warning system.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">Week 7–8 · Phase 3</div>
+        <h4>Payments + Premium Features</h4>
+        <p>Razorpay integration, premium subscription flow, priority matching queue for premium users, premium badges.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">Week 9–11 · Phase 4</div>
+        <h4>Testing + Polish + Soft Launch</h4>
+        <p>Bug fixes, performance optimization, mobile responsiveness, stress testing, beta user feedback, public launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM ROLES -->
+  <section>
+    <div class="section-label">08 — Team We Need</div>
+    <h2>Who does what.</h2>
+    <p>This is a small founding team project. Roles are lightweight but critical. No one needs to be full-time at the start.</p>
+
+    <div class="roles-grid">
+      <div class="role-card">
+        <div class="role-icon">⚙️</div>
+        <h4>Lead Developer</h4>
+        <p>Builds the full platform — frontend, backend, AI integration, payments. Core technical decision maker.</p>
+        <div class="role-tag core">Core</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📱</div>
+        <h4>Social Media Manager</h4>
+        <p>Handles Instagram, Twitter/X, Reddit presence. Builds community before launch. Creates content that resonates with lonely, curious people.</p>
+        <div class="role-tag social">Social</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🎨</div>
+        <h4>UI/UX Contributor</h4>
+        <p>Helps with visual design, user flows, branding, and making the platform feel warm and trustworthy despite being anonymous.</p>
+        <div class="role-tag core">Design</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📣</div>
+        <h4>Growth & Community</h4>
+        <p>Focuses on early user acquisition — college communities, Reddit, Discord, word-of-mouth campaigns, student groups.</p>
+        <div class="role-tag social">Growth</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🛡️</div>
+        <h4>Moderation Lead</h4>
+        <p>Reviews reports, monitors early conversations (anonymously), sets community guidelines, handles edge cases AI misses.</p>
+        <div class="role-tag ops">Ops</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📊</div>
+        <h4>Product & Analytics</h4>
+        <p>Tracks user behavior, conversion metrics, feedback loops. Decides what to build next. Can overlap with developer role.</p>
+        <div class="role-tag ops">Strategy</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT WORKS -->
+  <section>
+    <div class="section-label">09 — Why This Works</div>
+    <h2>The real opportunity.</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">📉</div>
+        <h4>Loneliness Epidemic</h4>
+        <p>WHO declared loneliness a global health priority in 2023. This platform directly addresses the need — especially in urban India.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h4>Privacy Anxiety is Rising</h4>
+        <p>People are increasingly unwilling to share identity online. Anonymous-first is a feature, not a limitation.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💸</div>
+        <h4>₹50 is Trivial</h4>
+        <p>Lower than a chai date. The conversion barrier is almost nonexistent. This is how you hit 1,000 subs fast.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚫</div>
+        <h4>No Real Competition</h4>
+        <p>Omegle is dead. Slowly is pen-pal only. Wakie is voice. No one owns intent-first anonymous text chat in India.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>Private. Safe.<br>Anonymous. <em>Meaningful.</em></h2>
+    <p>This is not another chat app. This is a new kind of human connection — built for the way people actually feel, not the way they're expected to perform online.</p>
+  </div>
+
+  <footer>
+    <span>ANONYMOUS MEANINGFUL CONNECTION PLATFORM</span>
+    <span>CONFIDENTIAL PITCH · 2025</span>
+  </footer>
+
+</div>
+</body>
+</html>
